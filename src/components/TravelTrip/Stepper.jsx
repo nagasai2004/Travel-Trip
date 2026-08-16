@@ -1,19 +1,37 @@
 import React from 'react'
 
 const stepsList = [
-  { id: 1, displayText: 'Your Details' },
-  { id: 2, displayText: 'Date Selection' },
-  { id: 3, displayText: 'Guests' },
-  { id: 4, displayText: 'Travel Assistance' },
-  { id: 5, displayText: 'Confirmation' },
+  { stepId: 'YOUR_DETAILS', displayText: 'Your Details' },
+  { stepId: 'DATE_SELECTION', displayText: 'Date Selection' },
+  { stepId: 'GUESTS', displayText: 'Guests' },
+  { stepId: 'TRAVEL_ASSISTANCE', displayText: 'Travel Assistance' },
+  { stepId: 'CONFIRMATION', displayText: 'Confirmation' },
 ]
 
 const Stepper = ({ currentStep }) => {
+  const getStepIndex = stepId => {
+    switch (stepId) {
+      case 'YOUR_DETAILS':
+        return 1
+      case 'DATE_SELECTION':
+        return 2
+      case 'GUESTS':
+        return 3
+      case 'TRAVEL_ASSISTANCE':
+        return 4
+      case 'CONFIRMATION':
+        return 5
+      default:
+        return 1
+    }
+  }
+
   return (
     <ul className="stepper-container">
-      {stepsList.map(step => {
-        const isCompleted = step.id < currentStep
-        const isActive = step.id === currentStep
+      {stepsList.map((step, index) => {
+        const stepNumber = index + 1
+        const isCompleted = stepNumber < currentStep
+        const isActive = stepNumber === currentStep
         const stepStatusClass = isCompleted
           ? 'completed'
           : isActive
@@ -21,7 +39,7 @@ const Stepper = ({ currentStep }) => {
           : 'not-started'
 
         return (
-          <li key={step.id} className={`step-item ${stepStatusClass}`}>
+          <li key={step.stepId} className={`step-item ${stepStatusClass}`}>
             <div className="step-icon-container">
               {isCompleted ? (
                 <img
@@ -30,7 +48,7 @@ const Stepper = ({ currentStep }) => {
                   className="step-completed-img"
                 />
               ) : (
-                <span className="step-number">{step.id}</span>
+                <span className="step-number">{stepNumber}</span>
               )}
             </div>
             <p className="step-title">{step.displayText}</p>
