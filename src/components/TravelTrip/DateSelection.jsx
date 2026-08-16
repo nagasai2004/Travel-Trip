@@ -10,8 +10,7 @@ const DateSelection = ({
   onNext,
   setDateError,
 }) => {
-  const handleSubmit = e => {
-    e.preventDefault()
+  const onClickNext = () => {
     if (!startDate) {
       setDateError('Select start date')
       return
@@ -29,51 +28,57 @@ const DateSelection = ({
   }
 
   return (
-    <form className="step-card" onSubmit={handleSubmit}>
+    <div className="step-wrapper">
       <h1 className="step-heading">Date Selection</h1>
-      <p className="step-subheading">Select your trip dates</p>
+      <p className="step-subheading">Select your Start and End Date</p>
 
-      <div className="input-group">
-        <label htmlFor="startDate" className="input-label">
-          Start Date
-        </label>
-        <input
-          id="startDate"
-          type="date"
-          className="input-field"
-          value={startDate}
-          onChange={onChangeStartDate}
-        />
-      </div>
+      <form className="inner-form-card" onSubmit={e => e.preventDefault()}>
+        <div className="input-group">
+          <label htmlFor="startDate" className="input-label">
+            Start Date
+          </label>
+          <input
+            id="startDate"
+            type="date"
+            className="input-field"
+            value={startDate}
+            onChange={onChangeStartDate}
+          />
+        </div>
 
-      <div className="input-group">
-        <label htmlFor="endDate" className="input-label">
-          End Date
-        </label>
-        <input
-          id="endDate"
-          type="date"
-          className="input-field"
-          value={endDate}
-          onChange={onChangeEndDate}
-        />
-      </div>
+        <div className="input-group">
+          <label htmlFor="endDate" className="input-label">
+            End Date
+          </label>
+          <input
+            id="endDate"
+            type="date"
+            className="input-field"
+            value={endDate}
+            onChange={onChangeEndDate}
+          />
+        </div>
 
-      {dateError && <p className="error-message">{dateError}</p>}
+        {dateError && <p className="error-message">{dateError}</p>}
 
-      <div className="button-group">
-        <button
-          type="button"
-          className="secondary-btn"
-          onClick={onPrevious}
-        >
-          Previous
-        </button>
-        <button type="submit" className="primary-btn">
-          Next
-        </button>
-      </div>
-    </form>
+        <div className="button-group">
+          <button
+            type="button"
+            className="secondary-btn"
+            onClick={onPrevious}
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            className="primary-btn"
+            onClick={onClickNext}
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 
