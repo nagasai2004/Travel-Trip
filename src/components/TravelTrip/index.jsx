@@ -3,7 +3,7 @@ import Stepper from './Stepper'
 import YourDetails from './YourDetails'
 import DateSelection from './DateSelection'
 import Guests from './Guests'
-import TravelAssistance from './TravelAssistance'
+import TravelAssistance, { travelAssistanceList } from './TravelAssistance'
 import Confirmation from './Confirmation'
 import './index.css'
 
@@ -82,7 +82,10 @@ const TravelTrip = () => {
     const checked = e.target.checked
     setAssistanceNeeded(checked)
     if (checked && !assistanceType) {
-      setAssistanceType('Wheelchair')
+      setAssistanceType(travelAssistanceList[0].travelAssistanceId)
+    }
+    if (!checked) {
+      setAssistanceType('')
     }
   }
 
@@ -190,12 +193,12 @@ const TravelTrip = () => {
 
   return (
     <div className="travel-trip-bg-container">
-      <div className="travel-trip-responsive-container">
-        <h1 className="main-heading">Travel Trip</h1>
-        <div className="card-container">
+      <div className="main-app-card">
+        <div className="left-sidebar">
+          <h1 className="app-heading">Travel Trip</h1>
           {!confirmed && <Stepper currentStep={currentStep} />}
-          <div className="step-content-container">{renderActiveStep()}</div>
         </div>
+        <div className="right-panel">{renderActiveStep()}</div>
       </div>
     </div>
   )
