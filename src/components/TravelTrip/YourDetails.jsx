@@ -11,8 +11,7 @@ const YourDetails = ({
   onNext,
   setDetailsError,
 }) => {
-  const handleSubmit = e => {
-    e.preventDefault()
+  const onClickNext = () => {
     if (!name.trim()) {
       setDetailsError('Enter your name')
       return
@@ -30,60 +29,66 @@ const YourDetails = ({
   }
 
   return (
-    <form className="step-card" onSubmit={handleSubmit}>
+    <div className="step-wrapper">
       <h1 className="step-heading">Your Details</h1>
       <p className="step-subheading">Enter your name and location details</p>
 
-      <div className="input-group">
-        <label htmlFor="name" className="input-label">
-          Name
-        </label>
-        <input
-          id="name"
-          type="text"
-          className="input-field"
-          value={name}
-          onChange={onChangeName}
-          placeholder="Enter name"
-        />
-      </div>
+      <form className="inner-form-card" onSubmit={e => e.preventDefault()}>
+        <div className="input-group">
+          <label htmlFor="name" className="input-label">
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            className="input-field"
+            value={name}
+            onChange={onChangeName}
+            placeholder="Enter Name"
+          />
+        </div>
 
-      <div className="input-group">
-        <label htmlFor="startLocation" className="input-label">
-          Start Location
-        </label>
-        <input
-          id="startLocation"
-          type="text"
-          className="input-field"
-          value={startLocation}
-          onChange={onChangeStartLocation}
-          placeholder="Enter start location"
-        />
-      </div>
+        <div className="input-group">
+          <label htmlFor="startLocation" className="input-label">
+            Start Location
+          </label>
+          <input
+            id="startLocation"
+            type="text"
+            className="input-field"
+            value={startLocation}
+            onChange={onChangeStartLocation}
+            placeholder="Enter Start Location"
+          />
+        </div>
 
-      <div className="input-group">
-        <label htmlFor="endLocation" className="input-label">
-          End Location
-        </label>
-        <input
-          id="endLocation"
-          type="text"
-          className="input-field"
-          value={endLocation}
-          onChange={onChangeEndLocation}
-          placeholder="Enter end location"
-        />
-      </div>
+        <div className="input-group">
+          <label htmlFor="endLocation" className="input-label">
+            End Location
+          </label>
+          <input
+            id="endLocation"
+            type="text"
+            className="input-field"
+            value={endLocation}
+            onChange={onChangeEndLocation}
+            placeholder="Enter End Location"
+          />
+        </div>
 
-      {detailsError && <p className="error-message">{detailsError}</p>}
+        {detailsError && <p className="error-message">{detailsError}</p>}
 
-      <div className="button-group">
-        <button type="submit" className="primary-btn">
-          Next
-        </button>
-      </div>
-    </form>
+        <div className="button-group center-btn-group">
+          <button
+            type="button"
+            className="primary-btn"
+            onClick={onClickNext}
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 
